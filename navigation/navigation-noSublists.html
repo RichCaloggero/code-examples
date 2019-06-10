@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Navigation Test (no nested lists)</title>
+<style>
+nav ul {
+list-style-type: none;
+}
+nav .collapseible {opacity: 1;}
+nav .collapseible.hidden {opacity: 0;}
+</style>
+</head>
+<body>
+<h1 tabindex="0">Navigation Test</h1>
+
+
+<nav><ul class="menu"><li class="menu-item">
+<h2><a class="label" href="#">top 1</a></h2>
+<div class="collapseible menu"><div class="menu-item">
+<a href="#">item 1.1</a>
+</div><div class="menu-item">
+<a href="#">item 1.2</a>
+</div><div class="menu-item">
+<a href="#">item 1.3</a>
+</div></div>
+
+</li><li class="menu-item">
+<h2><a class="label" href="#">top 2</a></h2>
+<div class="collapseible menu"><div class="menu-item">
+<a href="#">item 2.1</a>
+</div><div class="menu-item">
+<a href="#">item 2.2</a>
+</div><div class="menu-item">
+<a href="#">item 2.3</a>
+</div></div>
+
+</li><li class="menu-item">
+<h2><a class="label" href="#">top 3</a></h2>
+<div class="collapseible menu"><div class="menu-item">
+<a href="#">item 3.1</a>
+</div><div class="menu-item">
+<a href="#">item 3.2</a>
+</div><div class="menu-item">
+<a href="#">item 3.3</a>
+</div></div>
+
+</li></ul>
+</nav>
+
+<div id="message" role="log"></div>
+
+<script>
+hideAll();
+
+// handles case where focus moves outside the nav
+document.body.addEventListener ("focusin", e => {
+if (!topMenu().contains(e.target)) {
+hideAll();
+message(`outside nav - hiding all`);
+return;
+} // if
+}); // focus outside nav
+
+
+
+topMenu().addEventListener("focusin", focusIn); // cfocusin
+
+function focusIn (e) {
+if (!e.target) return;
+
+const label = e.target;
+const menu = menuElement(label);
+const parentMenu = closestMenu(label);
+
+if (parentMenu === topMenu()) {
+if (menu && isHidden(menu)) show(menu);
+
+} else {
+if (isHidden(parentMenu)) show(parentMenu);
+} // if
+} // focusIn
+
+function hideAll () {
+collapsibleMenus()
+.forEach(menu => {
+menu.classList.add("hidden");
+});
+} // hideAll
+
+function collapsibleMenus () {
+return Array.from(topMenu().querySelectorAll(".collapseible"));
+} // collapsibleMenus
+
+
+function closestMenu (node) {
+if (!node) return null;
+return node.parentElement? node.parentElement.closest(".menu") : null;
+} // closestMenu
+
+function topMenu () {
+return document.querySelector("nav > .menu");
+} // top
+
+function menuLabel (menu) {
+if (!menu || menu === topMenu()) return null;
+return menu.closest(".menu-item").querySelector(".label");
+//return menu.previousElementSibling;
+} // menuLabel
+
+function menuElement (label) {
+if (!label) return null;
+return label.closest(".menu-item").querySelector(".collapseible");
+//return label.nextElementSibling;
+} // menuElement
+
+function hide (menu) {
+menu.classList.add("hidden", true);
+} // hide
+
+function show (menu) {
+hideAll();
+menu.classList.remove("hidden");
+} // show
+
+function isHidden (menu) {return menu.classList.contains("hidden");}
+function isShowing (menu) {return !isHidden(menu);}
+
+function message (text) {
+const mess = document.querySelector("#message");
+const p = document.createElement("p");
+p.textContent = text;
+//mess.appendChild(p)
+mess.innerHTML = `<p>${text}</p>`;
+setTimeout(() => clearMessages(), 2000);
+} // message
+
+function clearMessages () {
+document.querySelector("#message").innerHTML = "";
+} // clearMessages
+
+</script>
+
+
+</body>
+</html>
