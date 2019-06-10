@@ -122,5 +122,5 @@ Basically, the screen reader user sees a sequence of links separated by headings
 
 We thus favor the nested list approach because although it is a bit more verbose in ways, it is clearer and will scale if we add more menu levels.
 
-- runnable: https://RichCaloggero.github.io/code-examples/navigation/no-nested-lists.html
-- source: https://github.com/RichCaloggero/code-examples/blob/master/navigation/no-nested-lists.html
+- runnable: https://RichCaloggero.github.io/code-examples/navigation/no-sublists.html
+- source: https://github.com/RichCaloggero/code-examples/blob/master/navigation/no-sublists.html
