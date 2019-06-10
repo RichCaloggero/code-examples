@@ -100,7 +100,7 @@ Nested lists can be overly verbose and sometimes cumbersome to use, especially i
 Adding headings can help deeply nested lists become more navicable. Be sure the heading level reflects nesting depth in some way (does not need to be a one-to-one correspondence between heading level number and nesting depth), but as nesting depth increases then so to should heading level.
 
 - runnable: https://RichCaloggero.github.io/code-examples/navigation/nested-lists.html
-- source: https://github.com/RichCaloggero/code-examples/blob/master/navigation/nested-lists.html
+- source: https://raw.githubusercontent.com/RichCaloggero/code-examples/blob/master/navigation/nested-lists.html
 
 
 ### no nested lists
@@ -123,4 +123,4 @@ Basically, the screen reader user sees a sequence of links separated by headings
 We thus favor the nested list approach because although it is a bit more verbose in ways, it is clearer and will scale if we add more menu levels.
 
 - runnable: https://RichCaloggero.github.io/code-examples/navigation/no-sublists.html
-- source: https://github.com/RichCaloggero/code-examples/blob/master/navigation/no-sublists.html
+- https://raw.githubusercontent.com/RichCaloggero/code-examples/master/navigation/no-sublists.html
