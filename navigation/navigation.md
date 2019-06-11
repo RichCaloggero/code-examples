@@ -1,25 +1,83 @@
 # Navigation
 
+Navigation is the cornerstone of most (if not all) websites and web applications. There are many ways to implement navigation, some more accessible and usable than others.
 
-Since the menus are not deeply nested, the screen reader user does not need to see "menu behavior" here; we can simply show the list structure as-is (see below).
+## Simple
 
-Non-screen reader users (both mouse and keyboard users) can see menus open / close on focus.
+- a list of links
+- or a container containing a simple series of links
+- single level (i.e. no nesting)
+- wrap in `nav` element with `aria-label`
+- subnav or section-specific nav separate container, usually inside `main`
 
-This will work fine if the method of hiding the menus leaves them in the dom and available to screen reader users no matter their visibility. In this case, the accessibility tree will not need to be recalculated each time the state of a menu changes, so no erroneous announcement or behavior is seen.
+```
+<header>
+<nav aria-label="global">
+<a href="p1.html">section 1</a>
+<a aria-current="page" href="p2.html">section 2</a>
+<a href="p3.html">section 3</a>
+</nav>
+</header><main>
+<nav aria-label="section">
+<a href="p2.1.html">subsection 2.1</a>
+<a aria-current="page" href="p2.2.html">subsection 2.2</a>
+</nav>
+<p>... main page content ...</p>
+</main>
+<footer>
+<p>... footer content ...</p>
+</footer>
+```
 
-Hiding with CSS display:none or with the HTML "hidden" attribute *will not work*, and will exhibit bad behavior with at least some screen readers.  This is because the accessibility tree needs to be recalculated each time a menu's visibility changes, because hiding this way *does* effect the screen reader's view of the DOM.
+## Shallow Nesting
+
+A simple two-level hierarchy can be expressed with at least one level of list. The second level can be either nested lists, or a simple `div` containing a series of links.
 
 
-Three possible ways of hiding then would be:
+- top level links wrapped in heading tags
+- second level links in second level list or simple `div`
+- if third level needed, then put at top of `main` as above
 
-- via css opacity property;
-- via css clip property
-- moving off-screen via css positioning
+## Collapsible
+
+Collapsible navigation presents several issues for keyboard and screen reader users.
+
+- can use similar structure as above for 1 and 2 level hierarchies
+- strongly suggest using nested lists for hierarchies more than 2 levels deep
+- indicate that an element can be collapsed, and it's current state, using `aria-expanded`
+   + attribute *must* be present in order for screen reader users to know the item is collapsible
+   + value of "true" for expanded, "false" if collapsed
+- adding keyboard behavior may be challenging if both landing pages and collapse controls needed for each item
+
+### Keyboard control
+
+If all collapsible controls simply control item visibility, leaving all links as leaf nodes, then use `button` elements (or links with role of button) to control visibility, and normal links to actually jump to new pages.
+
+For example, consider a site which sells items in various categories: household, automotive, office, etc. It is likely that these category navigation elements do not need to jump the user to new pages. Thus, category names can be buttons which simply hide / show items in that category, reserving links for items which take the user to a page where they can purchase the particular item.
+
+However, if the desired behavior is to have each actionable item be a link (for example to a landing page for a subsection), as well as controlling expansion, then either:
+
+- give each item two controls, one to control visibility, and one to jump to landing page
+   + example: http://www.bookshare.org/
+- show static behavior to screen readers, while sighted mouse and keyboard users see expandion on focus
+
+The issue is that to implement this behavior for keyboard users, one must expand / collapse on focus. Some screen readers (most notably those which use both real and virtual modes, i.e. Jaws and NVDA), may exhibit timing issues when attempting to render the DOM when visibility changes.
+
+To avoid the issue, one must use a method of controling element visibility other than CSS `display:none`, CSS `visibility:hidden` and the HTML5 `hidden` attribute. These hiding methods hide from screen readers as well as from sighted users, which means that each time an element's visibility changes, the screen reader must reinterpret the DOM. This can cause the screen reader to present incorrect and/or garbled speech while the transition is in process.
+
+To avoid the issue, use ways of controling visibility which are not detectable via screen reader:
+
+- CSS `opacity`
+- CSS `position` (moving off-screen)
+- CSS `clip`
+
+Mouse users will see items expand / collapse on hover, sighted keyboard users will see items expand / collapse on focus, but screen reader users will perceive all elements as being static and always visible.  Because of this fact, it is helpful to not create hierarchies more than two or three levels deep. Unfortunately, this limits the usefulness of this scheme, since presumably the reason to use collapsible nav elements is to allow for more deeply nested hierarchies.
+
+### More Details
 
 
+#### HTML
 
-
-### HTML
 
 ```
 <nav><ul class="menu"><li>
@@ -56,7 +114,7 @@ Three possible ways of hiding then would be:
 </nav>
 ```
 
-### Javascript
+#### Javascript
 
 ```
 hideAll();
