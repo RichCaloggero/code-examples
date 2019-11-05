@@ -152,13 +152,19 @@ https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.ht
 
 This plugin produces menus which attempt to get around the expand on focus issues described above by expanding only when a forward tab is detected. This is somewhat better, but is still unexpected behavior. Here is a small script which can mitagate this behavior. To install it, do the following:
 
-1. open your wordpress plugins and install the plugin called "Header and Footer Scripts". There may be many wwhose titles contain these words, but the one I used is simply called "Header and Footer Scripts".
+1. open your wordpress plugins and install the plugin called "Header and Footer Scripts". There may be many whose titles contain these words, but the one I used is simply called "Header and Footer Scripts".
 2. Activate the plugin
 3. Using the plugin, add the following code into the footer and click "save" (note the `script` tag is required here)
+4. open the megamenu plugin to the general settings page and:
+	- uncheck "unbind javascript events"
+	- check "Prefix Menu Item Classes"
+	- click "save changes"
+5. Refresh main site preview to see changes
+6. Publish
 
 ```
 <script>
-{ // module
+{ // module (does not create globals)
 const menus = document.querySelectorAll(".mega-menu-wrap");
 
 menus.forEach(menu => {
