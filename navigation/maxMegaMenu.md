@@ -1,6 +1,10 @@
 ## Wordpress Plugin "MaxMegaMenu"
 
-This plugin produces menus which attempt to get around the [expand on focus issues described here](.) by expanding only when a forward tab is detected. This is somewhat better, but is still unexpected behavior. Here is a small script which can mitagate this behavior. To install it, do the following:
+This plugin produces menus which attempt to mitigate some of the issues around the expand on focus behavior by expanding only when a forward tab is detected. This is somewhat better, but is still unexpected behavior. Here is a small script which can mitagate this behavior. When this script is installed, menus will open via keyboard only when clicked.
+
+The remaining issue here is that if menus require click to expand, then a menu link cannot both operate a menu and load a new page. Again, this plugin has  a mode in which first click opens menu, second click follows link, but this is unexpected, nonstandard behavior which will end up confusing users, especially those using screen readers. So when installing this script, we advise turning this mode off in the plugin configuration settings.  
+
+To install it, do the following:
 
 1. open your wordpress plugins and install the plugin called "Header and Footer Scripts". There may be many whose titles contain these words, but the one I used is simply called "Header and Footer Scripts".
 2. Activate the plugin
