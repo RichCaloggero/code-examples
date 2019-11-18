@@ -193,4 +193,3 @@ e.stopPropagation();
 </script>
 ```
 
-How to trigger update!
