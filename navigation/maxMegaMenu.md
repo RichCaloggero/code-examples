@@ -1,6 +1,6 @@
 ## Wordpress Plugin "MaxMegaMenu"
 
-This plugin produces menus which attempt to get around the [expand on focus issues described here](./navigation) by expanding only when a forward tab is detected. This is somewhat better, but is still unexpected behavior. Here is a small script which can mitagate this behavior. To install it, do the following:
+This plugin produces menus which attempt to get around the [expand on focus issues described here](.) by expanding only when a forward tab is detected. This is somewhat better, but is still unexpected behavior. Here is a small script which can mitagate this behavior. To install it, do the following:
 
 1. open your wordpress plugins and install the plugin called "Header and Footer Scripts". There may be many whose titles contain these words, but the one I used is simply called "Header and Footer Scripts".
 2. Activate the plugin
