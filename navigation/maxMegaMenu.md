@@ -7,6 +7,7 @@ The remaining issue here is that if menus require click to expand, then a menu l
 To install it, do the following:
 
 1. open your wordpress plugins and install the plugin called "Header and Footer Scripts". There may be many whose titles contain these words, but the one I used is simply called "Header and Footer Scripts".
+	- [Header and Footer Scripts](https://wordpress.org/plugins/header-and-footer-scripts/)
 2. Activate the plugin
 3. Using the plugin, add the following code into the footer and click "save" (note the `script` tag is required here)
 4. open the megamenu plugin to the general settings page and:
@@ -18,16 +19,26 @@ To install it, do the following:
 
 ```
 <script>
-{ // module (does not create globals)
+{ // wrap in block to prevent polution of global environment
+
+// find all maxMegaMenu generated menus on this page
 const menus = document.querySelectorAll(".mega-menu-wrap");
 
 menus.forEach(menu => {
+// All three of these keyboard events must be intercepted, else the plugin default behavior persists
 menu.addEventListener("keydown", inhibitHandlers, true);
 menu.addEventListener("keyup", inhibitHandlers, true);
 menu.addEventListener("keypress", inhibitHandlers, true);
 
-menu.querySelectorAll(".mega-menu > .mega-menu-item").forEach(menuItem => addHeading(menuItem));
+// add h2 tags to top level menu toggles
+menu.querySelectorAll(".mega-menu > .mega-menu-item")
+.forEach(menuItem => addHeading(menuItem));
 });
+
+function inhibitHandlers (e) {
+e.stopImmediatePropagation();
+e.stopPropagation();
+} // inhibitHandlers
 
 function addHeading (menuItem) {
 const link = menuItem.querySelector(".mega-menu-link");
@@ -35,14 +46,10 @@ const h2 = document.createElement("h2");
 h2.textContent = link.textContent;
 link.textContent = "";
 link.appendChild(h2);
-//menuItem.replaceChild(h2, link);
 } // addHeading
 
-function inhibitHandlers (e) {
-e.stopImmediatePropagation();
-e.stopPropagation();
-//e.preventDefault();
-} // inhibitHandlers
+
+//alert("footer script added");
 } // end
 </script>
 ```
