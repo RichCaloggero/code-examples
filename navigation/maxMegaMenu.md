@@ -66,7 +66,7 @@ link.appendChild(h2);
 </script>
 ```
 
-### Separate toggler and "landking page" links
+### Separate toggler and "landing page" links
 
 ```
 <script>
@@ -98,24 +98,24 @@ function addToggler (submenu) {
 // existing link already has event, so we'll use that as our toggler
 const toggler = submenu.parentElement.children[0];
 const link = document.createElement("a");
-toggler.setAttribute("role", "button");
+//link.className = toggler.className;
 link.innerHTML = toggler.innerHTML;
 link.setAttribute("href", toggler.getAttribute("href"));
+
+toggler.setAttribute("role", "button");
 toggler.setAttribute("href", "#");
+toggler.classList.add("toggler");
+toggler.innerHTML = link.innerHTML;
 
 submenu.parentElement.insertBefore(link, submenu);
  } // addToggler
 
 function addHeading (menuItem) {
-const link = menuItem.querySelector(".mega-menu-link");
-const h2 = document.createElement("h2");
-h2.textContent = link.textContent;
-link.textContent = "";
-link.appendChild(h2);
+const toggler = menuItem.querySelector(".toggler");
+toggler.innerHTML = `<h2><i aria-hidden="true">&DownArrow;</i><span style="position:absolute;left:-9999;">${toggler.innerHTML}</span></h2>`;
 } // addHeading
 
 
 //alert("footer script added");
 } // end
-</script>
-```
+</script>```
