@@ -112,7 +112,7 @@ submenu.parentElement.insertBefore(link, submenu);
 
 function addHeading (menuItem) {
 const toggler = menuItem.querySelector(".toggler");
-toggler.innerHTML = `<h2><i aria-hidden="true">&DownArrow;</i><span style="position:absolute;left:-9999;">${toggler.innerHTML}</span></h2>`;
+toggler.innerHTML = `<h2><i aria-hidden="true">&DownArrow;</i><span>${toggler.innerHTML}</span></h2>`;
 } // addHeading
 
 
