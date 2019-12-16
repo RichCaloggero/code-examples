@@ -4,7 +4,7 @@ This plugin produces menus which attempt to mitigate some of the issues around t
 
 The remaining issue here is that if menus require click to expand, then a menu link cannot both operate a menu and load a new page.  We thus create another element associated with each menu item which acts as a standard link to the landing page. So effectively, each menu item which contains a submenu now has two items within it: the first follows the link, the second toggles the submenu.
 
-See the second version here:
+See a simple demo here:
 [https://atica11y.wpcomstaging.com/](https://atica11y.wpcomstaging.com/)
 
 ## Installation
