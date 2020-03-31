@@ -11,5 +11,5 @@ This example shows how to create radio buttons and checkboxes which respond to t
 
 ## See the following
 
-- code: https://github.com/RichCaloggero/code-examples/master/forms/aria-checkbox-radio.html
-- runnable: https://RichCaloggero.github.io/code-examples/forms/aria-checkbox-radio.html
+- [examine the code](https://github.com/RichCaloggero/code-examples/master/forms/aria-checkbox-radio.html)
+- [run it](https://RichCaloggero.github.io/code-examples/forms/aria-checkbox-radio.html)
